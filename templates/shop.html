@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="section-title">
+        <h2>Our Shop</h2>
+        <p>Browse through our wide range of fresh produce</p>
+    </div>
+
+    <div style="display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center;">
+        <a href="{{ url_for('shop') }}" class="btn" style="background: {{ 'var(--primary-color)' if not request.args.get('category') else '#fff' }}; color: {{ '#fff' if not request.args.get('category') else 'var(--text-color)' }}; border: 1px solid #ddd;">All Items</a>
+        {% for cat in all_categories %}
+            <a href="{{ url_for('shop', category=cat.id) }}" class="btn" 
+               style="background: {{ 'var(--primary-color)' if request.args.get('category')|int == cat.id else '#fff' }}; 
+                      color: {{ '#fff' if request.args.get('category')|int == cat.id else 'var(--text-color)' }}; 
+                      border: 1px solid #ddd;">
+                {{ cat.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="product-grid">
+        {% if products %}
+            {% for product in products %}
+            <div class="product-card">
+                {% if product.discount_price %}
+                    <span class="product-tag" style="background: #e74c3c;">-{{ (((product.price - product.discount_price) / product.price) * 100)|int }}%</span>
+                {% endif %}
+                <img src="{{ product.image_url or 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1974' }}" alt="{{ product.name }}" class="product-img">
+                <div class="product-info">
+                    <h3>{{ product.name }}</h3>
+                    <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+                        {% if product.discount_price %}
+                            <span class="product-price">₹{{ "%.2f"|format(product.discount_price) }}</span>
+                            <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">₹{{ "%.2f"|format(product.price) }}</span>
+                        {% else %}
+                            <span class="product-price">₹{{ "%.2f"|format(product.price) }}</span>
+                        {% endif %}
+                    </div>
+                    <button class="add-btn" onclick="addToCart({{ product.id }})">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div style="grid-column: 1/-1; text-align: center; padding: 4rem; background: #fff; border-radius: 20px;">
+                <i class="fas fa-search" style="font-size: 3rem; color: #ddd; margin-bottom: 1rem;"></i>
+                <h3>No products found</h3>
+                <p>Try adjusting your filters or search query.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

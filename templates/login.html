@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="display: flex; justify-content: center; align-items: center; min-height: 70vh; background: #f0f2f5;">
+    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow); width: 100%; max-width: 400px;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="font-size: 2rem; color: var(--primary-color);">Welcome Back</h2>
+            <p style="color: #777;">Login to your Fresh Basket account</p>
+        </div>
+        
+        <form action="{{ url_for('login') }}" method="POST">
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email Address</label>
+                <input type="email" name="email" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none;">
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Password</label>
+                <input type="password" name="password" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Login</button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <p>Don't have an account? <a href="{{ url_for('register') }}" style="color: var(--primary-color); font-weight: 600;">Register here</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}

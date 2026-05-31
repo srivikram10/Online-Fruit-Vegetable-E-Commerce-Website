@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section" style="display: flex; justify-content: center; align-items: center; min-height: 80vh; background: #f0f2f5;">
+    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow); width: 100%; max-width: 450px;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="font-size: 2rem; color: var(--primary-color);">Create Account</h2>
+            <p style="color: #777;">Join the Fresh Basket community</p>
+        </div>
+        
+        <form action="{{ url_for('register') }}" method="POST">
+            <div style="margin-bottom: 1.2rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Username</label>
+                <input type="text" name="username" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none;">
+            </div>
+            <div style="margin-bottom: 1.2rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email Address</label>
+                <input type="email" name="email" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none;">
+            </div>
+            <div style="margin-bottom: 1.2rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Password</label>
+                <input type="password" name="password" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Register</button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <p>Already have an account? <a href="{{ url_for('login') }}" style="color: var(--primary-color); font-weight: 600;">Login here</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}

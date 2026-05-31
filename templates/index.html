@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Freshness Delivered to Your Home</h1>
+    <p>Get the highest quality fruits and vegetables sourced directly from farmers. Healthy living starts with fresh food.</p>
+    <div class="hero-btns">
+        <a href="{{ url_for('shop') }}" class="btn btn-primary">Shop Now</a>
+        <a href="#featured" class="btn" style="color: #fff; border: 1px solid #fff; margin-left: 10px;">View Offers</a>
+    </div>
+</section>
+
+<!-- Category Section -->
+<section class="section">
+    <div class="section-title">
+        <h2>Shop by Category</h2>
+    </div>
+    <div class="category-grid">
+        {% for cat in all_categories %}
+        <div class="category-card" onclick="window.location.href='{{ url_for('shop', category=cat.id) }}'">
+            <i class="fas {% if cat.slug == 'fruits' %}fa-apple-whole{% elif cat.slug == 'vegetables' %}fa-carrot{% elif cat.slug == 'organic' %}fa-leaf{% elif cat.slug == 'dry-fruits' %}fa-seedling{% elif cat.slug == 'juice' %}fa-blender{% else %}fa-box{% endif %}"></i>
+            <h3>{{ cat.name }}</h3>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Seasonal Banner -->
+<section style="background: var(--secondary-color); color: #fff; padding: 3rem 5%; border-radius: 30px; margin: 0 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+    <div>
+        <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Seasonal Summer Offer!</h2>
+        <p style="font-size: 1.2rem;">Get up to 30% off on all fresh mangoes and citrus fruits.</p>
+    </div>
+    <a href="{{ url_for('shop', category=1) }}" class="btn" style="background: #fff; color: var(--secondary-color);">Grab Now</a>
+</section>
+
+<!-- Featured Products -->
+<section class="section" id="featured">
+    <div class="section-title">
+        <h2>Featured Products</h2>
+    </div>
+    <div class="product-grid">
+        {% if featured %}
+            {% for product in featured %}
+            <div class="product-card">
+                <span class="product-tag">Featured</span>
+                <img src="{{ product.image_url or 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1974' }}" alt="{{ product.name }}" class="product-img">
+                <div class="product-info">
+                    <h3>{{ product.name }}</h3>
+                    <p style="color: #777; font-size: 0.9rem;">Fresh from farm</p>
+                    <div class="product-price">₹{{ "%.2f"|format(product.price) }}</div>
+                    <button class="add-btn" onclick="addToCart({{ product.id }})">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div style="grid-column: 1/-1; text-align: center; padding: 3rem; background: #fff; border-radius: 20px;">
+                <p>No featured products yet. Please add some from the admin panel.</p>
+                <a href="{{ url_for('shop') }}" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Browse Shop</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="section" style="background: #fff;">
+    <div class="section-title">
+        <h2>Why Choose Fresh Basket?</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+        <div style="text-align: center; padding: 2rem;">
+            <i class="fas fa-truck" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Free Delivery</h3>
+            <p>On orders above ₹500</p>
+        </div>
+        <div style="text-align: center; padding: 2rem;">
+            <i class="fas fa-certificate" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Organic Certified</h3>
+            <p>100% natural and healthy</p>
+        </div>
+        <div style="text-align: center; padding: 2rem;">
+            <i class="fas fa-headset" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>24/7 Support</h3>
+            <p>Always here to help you</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

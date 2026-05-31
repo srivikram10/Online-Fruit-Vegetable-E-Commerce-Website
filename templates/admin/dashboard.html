@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; min-height: 80vh;">
+    <!-- Admin Sidebar -->
+    <div style="width: 250px; background: white; border-right: 1px solid #ddd; padding: 2rem 0;">
+        <div style="padding: 0 2rem; margin-bottom: 2rem;">
+            <h3 style="color: var(--primary-color);">Admin Panel</h3>
+        </div>
+        <ul class="admin-nav" style="list-style: none;">
+            <li style="padding: 1rem 2rem; background: #f0fdf4; border-left: 4px solid var(--primary-color);">
+                <a href="#"><i class="fas fa-th-large"></i> Dashboard</a>
+            </li>
+            <li style="padding: 1rem 2rem;">
+                <a href="#"><i class="fas fa-box"></i> Products</a>
+            </li>
+            <li style="padding: 1rem 2rem;">
+                <a href="#"><i class="fas fa-shopping-bag"></i> Orders</a>
+            </li>
+            <li style="padding: 1rem 2rem;">
+                <a href="#"><i class="fas fa-users"></i> Customers</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Admin Content -->
+    <div style="flex: 1; padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2>Dashboard Overview</h2>
+            <button class="btn btn-primary"><i class="fas fa-plus"></i> Add New Product</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+            <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: var(--shadow); border-left: 4px solid var(--primary-color);">
+                <p style="color: #777;">Total Sales</p>
+                <h3 style="font-size: 2rem;">₹4,250</h3>
+            </div>
+            <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: var(--shadow); border-left: 4px solid var(--secondary-color);">
+                <p style="color: #777;">Orders</p>
+                <h3 style="font-size: 2rem;">85</h3>
+            </div>
+            <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: var(--shadow); border-left: 4px solid #3498db;">
+                <p style="color: #777;">Products</p>
+                <h3 style="font-size: 2rem;">42</h3>
+            </div>
+        </div>
+
+        <h3>Recent Orders</h3>
+        <div style="background: white; padding: 1rem; border-radius: 15px; box-shadow: var(--shadow); margin-top: 1rem;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="text-align: left; border-bottom: 2px solid #eee;">
+                        <th style="padding: 1rem;">Order ID</th>
+                        <th style="padding: 1rem;">Customer</th>
+                        <th style="padding: 1rem;">Status</th>
+                        <th style="padding: 1rem;">Total</th>
+                        <th style="padding: 1rem;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 1rem;">#ORD-752</td>
+                        <td style="padding: 1rem;">John Doe</td>
+                        <td style="padding: 1rem;"><span style="padding: 4px 10px; background: #dcfce7; color: #166534; border-radius: 20px; font-size: 0.8rem;">Delivered</span></td>
+                        <td style="padding: 1rem;">₹45.00</td>
+                        <td style="padding: 1rem;"><a href="#" style="color: var(--primary-color);">View</a></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 1rem;">#ORD-753</td>
+                        <td style="padding: 1rem;">Jane Smith</td>
+                        <td style="padding: 1rem;"><span style="padding: 4px 10px; background: #fef9c3; color: #854d0e; border-radius: 20px; font-size: 0.8rem;">Processing</span></td>
+                        <td style="padding: 1rem;">₹32.50</td>
+                        <td style="padding: 1rem;"><a href="#" style="color: var(--primary-color);">View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
